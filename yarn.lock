@@ -5383,10 +5383,10 @@
     "react-lifecycles-compat" "2.0.0"
     "tslib" "1.9.3"
 
-"react-native-paper@^4.11.0", "react-native-paper@>= 3.0.0":
-  "integrity" "sha512-MRqaX+8HeRpDo2Qa8TNX2+nIGDCa/zv+GWnfxNGcr1EbDPUwNRc6YICjvBHLvDJrGHxDaSYdU4ASkQE72cQuJg=="
-  "resolved" "https://registry.npmjs.org/react-native-paper/-/react-native-paper-4.11.0.tgz"
-  "version" "4.11.0"
+"react-native-paper@^4.11.1", "react-native-paper@>= 3.0.0":
+  "integrity" "sha512-mAQ74KUrOIcMEg1crrIsA7eXDaPk/fjvKFDLcN7gBBeV/zhhQiqc+/y6t+8STKsZutRA2U5/eB+0MBisybokmQ=="
+  "resolved" "https://registry.npmjs.org/react-native-paper/-/react-native-paper-4.11.1.tgz"
+  "version" "4.11.1"
   dependencies:
     "@callstack/react-theme-provider" "^3.0.7"
     "color" "^3.1.2"

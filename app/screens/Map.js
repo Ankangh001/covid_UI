@@ -8,13 +8,12 @@ import {
     View,
     TouchableWithoutFeedback,
     Platform,
-    TextInput
 
 } from 'react-native';
+import { TextInput } from 'react-native-paper';
 
 import MapView, { Callout, Marker } from 'react-native-maps';
-import { LinearGradient } from 'expo-linear-gradient';
-
+import { FontAwesome } from '@expo/vector-icons';
 
 const response = [
     {
@@ -57,9 +56,7 @@ export default function Mapscreen() {
         <SafeAreaView forceInset={{ top: 'always' }}>
             <View style={{ backgroundColor: '#62d0f695', paddingTop: Platform.OS == 'android' ? 30 : 0 }} />
 
-            <View style={styles.searchbox}>
-                <TextInput style={styles.searchInput} placeholder="Search" />
-            </View>
+
             <MapView
                 onPress={(event) => {
                     setVisible(false)
@@ -105,18 +102,27 @@ export default function Mapscreen() {
                             ).map(
                                 (it) =>
                                 (<>
-                                    <Image style={styles.mapboxImage} resizeMode='cover' source={it.image}/>
+                                    <Image key={it.id} style={styles.mapboxImage} resizeMode='cover' source={it.image} />
                                     <View style={styles.mapboxText}>
                                         <Text style={styles.mapboxhead}>{it.callout}</Text>
                                         <Text style={styles.mapboxDesc}>{it.description} </Text>
-                                    </View>
-                                </>)
+                                    
+                                </View></>)
                             )
                         }
 
                     </View>
                 </TouchableWithoutFeedback>
             ) : <View />}
+
+            <View style={styles.container} >
+                
+                <TextInput
+                    style={styles.search}
+                    label="Search In Map"
+                    right={<TextInput.Icon name="magnify" />}
+                />
+            </View>
         </SafeAreaView>
     )
 }
@@ -124,10 +130,23 @@ export default function Mapscreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 22
+        marginTop: 22,
+        position: 'absolute',
+        top: '5%',
+        width: width,
+    },
+    search: {
+        width: '90%',
+        borderColor: '#62d0f6',
+        borderWidth: 2,
+        textAlign: 'left',
+        fontSize: 18,
+        color: '#666',
+        backgroundColor: '#fff',
+        elevation: 3,
+        height:50,
     },
     map: {
         width: width,
@@ -142,7 +161,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-around',
         borderRadius: 10,
-        height: 100,
+        height: 120,
         overflow: 'hidden',
         position: 'absolute',
         bottom: 20,
@@ -168,5 +187,3 @@ const styles = StyleSheet.create({
 });
 
 
-
-// home cart  map profile menu s
