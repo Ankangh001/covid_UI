@@ -13,8 +13,9 @@ export default function HomeScreen() {
 
     return (
 
-        <ScrollView>
-            <View>
+        <View >
+            <View style={{ backgroundColor:'#62d0f695', paddingTop: Platform.OS=='android'?30:0}}  />
+            <ScrollView>
                 <LinearGradient style={{ marginBottom: 50 }} colors={['#62d0f630', '#62d0f625']}>
                     <Header />
                     <Search />
@@ -24,8 +25,8 @@ export default function HomeScreen() {
                     <Guide />
                     <StatusBar style="auto" />
                 </LinearGradient>
-            </View>
-        </ScrollView>
+            </ScrollView>
+        </View>
     );
 }
 const styles = StyleSheet.create({

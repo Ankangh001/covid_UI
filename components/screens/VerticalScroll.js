@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 const VerticalScroll = () => {
     return (
-        <ScrollView showsVerticalScrollIndicator={false} horizontal={true} style={styles.container} >
+        <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={styles.container} >
             <TouchableOpacity>
                 <View style={styles.box} >
                     <FontAwesome5 name="leaf" size={35} color="#277abb" />

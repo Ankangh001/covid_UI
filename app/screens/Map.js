@@ -1,6 +1,20 @@
 import React, { useState } from 'react'
-import { SafeAreaView, Text, Image, StyleSheet, Dimensions, View } from 'react-native';
+import {
+    SafeAreaView,
+    Text,
+    Image,
+    StyleSheet,
+    Dimensions,
+    View,
+    TouchableWithoutFeedback,
+    Platform,
+    TextInput
+
+} from 'react-native';
+
 import MapView, { Callout, Marker } from 'react-native-maps';
+import { LinearGradient } from 'expo-linear-gradient';
+
 
 const response = [
     {
@@ -10,7 +24,9 @@ const response = [
             longitude: 88.3639
         },
         callout: "Place Name",
-        icon: require('../../assets/hospital.png'),
+        icon: require('../../assets/map.png'),
+        image: require('../../assets/image1.png'),
+        description: 'this is a small description about place... '
     },
     {
         id: '2',
@@ -18,8 +34,12 @@ const response = [
             latitude: 22.5629,
             longitude: 88.3962,
         },
-        callout: 'Place Name',
+        callout: 'Place Name 2',
         icon: require('../../assets/hospital.png'),
+        image: require('../../assets/image2.png'),
+        description: 'Welcome to the best hospital this is a great place.. '
+
+
     }
 ]
 
@@ -30,9 +50,16 @@ const height = Dimensions.get('window').height;
 export default function Mapscreen() {
 
     const [spot, setSpot] = useState(null);
-    const [visible, setVisible] = useState(false)
+    const [visible, setVisible] = useState(false);
+    const [card, setCard] = useState('');
+
     return (
         <SafeAreaView forceInset={{ top: 'always' }}>
+            <View style={{ backgroundColor: '#62d0f695', paddingTop: Platform.OS == 'android' ? 30 : 0 }} />
+
+            <View style={styles.searchbox}>
+                <TextInput style={styles.searchInput} placeholder="Search" />
+            </View>
             <MapView
                 onPress={(event) => {
                     setVisible(false)
@@ -42,7 +69,7 @@ export default function Mapscreen() {
                 initialRegion={{
                     longitude: 88.3639,
                     latitude: 22.5722,
-                    latitudeDelta: 10,
+                    latitudeDelta: 0.05,
                     longitudeDelta: 1,
                 }}
             >
@@ -52,7 +79,12 @@ export default function Mapscreen() {
                         key={item.id}
                         coordinate={item.coordinates}
                         title={item.callout}
-                        
+                        onPress={(event) => {
+                            setSpot(event._targetInst.return.key);
+                            setVisible(true);
+                        }}
+                        showUserLocation={true}
+
                     >
                         <Image
                             style={{ width: 50, height: 32 }}
@@ -61,18 +93,30 @@ export default function Mapscreen() {
                         />
                     </MapView.Marker>
                 ))}
-
-
             </MapView>
 
-            <View style={styles.mapbox}>
-                <Image style={styles.mapboxImage} resizeMode='cover' source={require('../../assets/logo.png')} />
-                <View style={styles.mapboxText}>
-                    <Text style={styles.mapboxhead}>Place Name</Text>
-                    <Text style={styles.mapboxDesc}>Place NamePlace NamePlace NamePlace NamePlace NamePlace NamePlace Name </Text>
-                </View>
-            </View>
+            {spot && visible ? (
+                <TouchableWithoutFeedback onPress={() => { setVisible(true) }} >
+                    <View style={styles.mapbox}>
+                        {
+                            response.filter(
+                                (item) =>
+                                    item.id == spot
+                            ).map(
+                                (it) =>
+                                (<>
+                                    <Image style={styles.mapboxImage} resizeMode='cover' source={it.image}/>
+                                    <View style={styles.mapboxText}>
+                                        <Text style={styles.mapboxhead}>{it.callout}</Text>
+                                        <Text style={styles.mapboxDesc}>{it.description} </Text>
+                                    </View>
+                                </>)
+                            )
+                        }
 
+                    </View>
+                </TouchableWithoutFeedback>
+            ) : <View />}
         </SafeAreaView>
     )
 }
@@ -87,7 +131,7 @@ const styles = StyleSheet.create({
     },
     map: {
         width: width,
-        height: height + 30,
+        height: height - 80,
     },
     mapbox: {
         flexDirection: 'row',
@@ -101,7 +145,7 @@ const styles = StyleSheet.create({
         height: 100,
         overflow: 'hidden',
         position: 'absolute',
-        bottom: height / 8,
+        bottom: 20,
         elevation: 10
     },
     mapboxImage: {
