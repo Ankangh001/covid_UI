@@ -6,7 +6,7 @@ import HomeScreen from './Home';
 import Mapscreen from './Map';
 import Cart from './Cart';
 import Menu from './Menu';
-import ProfileScreen from '../../Screens/Profile';
+import ProfileScreen from './Profile';
 import { NavigationContainer } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import 'react-native-gesture-handler';

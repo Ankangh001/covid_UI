@@ -1,69 +1,78 @@
 import React, { useState } from 'react'
 import { SafeAreaView, Text, Image, StyleSheet, Dimensions, View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
 import MapView, { Callout, Marker } from 'react-native-maps';
+
+const response = [
+    {
+        id: '1',
+        coordinates: {
+            latitude: 22.5722,
+            longitude: 88.3639
+        },
+        callout: "Place Name",
+        icon: require('../../assets/hospital.png'),
+    },
+    {
+        id: '2',
+        coordinates: {
+            latitude: 22.5629,
+            longitude: 88.3962,
+        },
+        callout: 'Place Name',
+        icon: require('../../assets/hospital.png'),
+    }
+]
+
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
+
 
 export default function Mapscreen() {
 
-    const [pin, setPin] = useState({
-        latitude: 22.6258,
-        longitude: 88.4348,
-
-    })
+    const [spot, setSpot] = useState(null);
+    const [visible, setVisible] = useState(false)
     return (
         <SafeAreaView forceInset={{ top: 'always' }}>
             <MapView
+                onPress={(event) => {
+                    setVisible(false)
+                }}
                 style={styles.map}
                 loadingEnabled={true}
                 initialRegion={{
                     longitude: 88.3639,
                     latitude: 22.5722,
-                    latitudeDelta: 0.03,
-                    longitudeDelta: 0.05,
+                    latitudeDelta: 10,
+                    longitudeDelta: 1,
                 }}
             >
-                <MapView.Marker
-                    coordinate={{
-                        latitude: 22.6258,
-                        longitude: 88.4348,
-                    }}
-                    onSelect={() => console.log('onSelect', arguments)}
-                    onDrag={() => console.log('onDrag', arguments)}
-                    onDragStart={() => console.log('onDragStart', arguments)}
-                    draggable
-                >
-                    <Image
-                        style={{ width: 50, height: 32 }}
-                        source={require('../../assets/map.png')} resizeMode='cover' />
+                {response.map((item) => (
 
-                </MapView.Marker>
-
-                <MapView.Marker
-                    coordinate={{
-                        longitude: 88.3639,
-                        latitude: 22.5722,
-                    }}
-                    onSelect={() => console.log('onSelect', arguments)}
-                    onDrag={() => console.log('onDrag', arguments)}
-                    onDragStart={() => console.log('onDragStart', arguments)}
-                    draggable
-                >
-                    <View>
+                    <MapView.Marker
+                        key={item.id}
+                        coordinate={item.coordinates}
+                        title={item.callout}
+                        
+                    >
                         <Image
                             style={{ width: 50, height: 32 }}
-                            source={require('../../assets/hospital.png')} 
+                            source={require('../../assets/hospital.png')}
                             resizeMode='cover'
-                        />                
-                    </View>
-                    <Callout style={styles.callout}>
-                        <ScrollView>
-                        <Text>test testtest testtest testtest testtest testtest test</Text>
-                        </ScrollView>
+                        />
+                    </MapView.Marker>
+                ))}
 
-                    </Callout>
-                   
-                </MapView.Marker>
+
             </MapView>
+
+            <View style={styles.mapbox}>
+                <Image style={styles.mapboxImage} resizeMode='cover' source={require('../../assets/logo.png')} />
+                <View style={styles.mapboxText}>
+                    <Text style={styles.mapboxhead}>Place Name</Text>
+                    <Text style={styles.mapboxDesc}>Place NamePlace NamePlace NamePlace NamePlace NamePlace NamePlace Name </Text>
+                </View>
+            </View>
+
         </SafeAreaView>
     )
 }
@@ -77,14 +86,40 @@ const styles = StyleSheet.create({
         marginTop: 22
     },
     map: {
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height,
+        width: width,
+        height: height + 30,
     },
-    callout:{
-        backgroundColor:'#fff',
-        padding:'10%',
-        alignItems:'center',
-        borderRadius:50
+    mapbox: {
+        flexDirection: 'row',
+        backgroundColor: '#fff',
+        width: width - 20,
+        marginHorizontal: 10,
+        padding: '5%',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        borderRadius: 10,
+        height: 100,
+        overflow: 'hidden',
+        position: 'absolute',
+        bottom: height / 8,
+        elevation: 10
+    },
+    mapboxImage: {
+        width: 100,
+        height: 100
+    },
+    mapboxText: {
+        width: width / 2,
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    mapboxhead: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginBottom: 12
+    },
+    mapboxDesc: {
+        fontSize: 12
     }
 });
 
