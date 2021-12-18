@@ -18,7 +18,8 @@ const config = {
     restDisplacementThreshold: 0.01,
     restSpeedThreshold: 0.01,
   },
-};
+}
+
 export default function App() {
   return (
     <NavigationContainer>
@@ -32,7 +33,6 @@ export default function App() {
             open: config,
             close: config
           },
-          // animation: 'fade'
         }}>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Home" component={MainScreen} />

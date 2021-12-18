@@ -1,48 +1,28 @@
 
 import React from 'react';
 import { StyleSheet, ScrollView, View, Text, Image, TouchableOpacity } from 'react-native';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './Home';
 import Mapscreen from './Map';
 import Cart from './Cart';
 import Menu from './Menu';
-import ProfileScreen from '../../Screens/Profile';
+import ProfileScreen from './Profile';
 import { NavigationContainer } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import 'react-native-gesture-handler';
 import { createStackNavigator } from '@react-navigation/stack';
 
-const Tab = createMaterialBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 
 
-export default function MainScreen() {
-
-    const CustomBtn = ({ children, onPress }) => (
-        <TouchableOpacity style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-        }}
-            onPress={onPress}
-        >
-            <View style={{
-                height: 70,
-                width: 70,
-                borderRadius: 40,
-                backgroundColor: '#ddd'
-            }}>
-                {children}
-
-            </View>
-        </TouchableOpacity>
-    )
+export default function TabNavigator() {
 
     return (
-
-
         <NavigationContainer independent={true}>
-            <Tab.Navigator labeled={false}
+            <Tab.Navigator 
+                labeled={false}
                 initialRouteName="Login"
                 activeColor="#277abb"
                 inactiveColor="#277abb70"
@@ -60,47 +40,58 @@ export default function MainScreen() {
                 }}
             >
 
-                <Tab.Screen name="Home" component={HomeScreen}
+                <Tab.Screen 
+                    name="Home" 
+                    component={HomeScreen}
                     options={{
                         tabBarIcon: ({ color, size }) => (
                             <MaterialCommunityIcons name="home" color={color} size={26} />
                         ),
-                    }} />
+                    }} 
+                />
 
-                <Tab.Screen name="Cart" component={Cart}
+                <Tab.Screen 
+                    name="Cart" 
+                    component={Cart}
                     options={{
                         tabBarIcon: ({ color, size }) => (
                             <MaterialCommunityIcons name="cart" color={color} size={26} />
                         ),
+                    }} 
+                />
 
-                    }} />
-
-                <Tab.Screen name="Map" component={Mapscreen}
+                <Tab.Screen 
+                    name="Map" 
+                    component={Mapscreen}
                     options={{
                         tabBarIcon: ({ color, size }) => (
                             <MaterialCommunityIcons name="map" color={color} size={26} />
                         ),
+                    }} 
+                />
 
-                    }} />
 
-
-                <Tab.Screen name="Profile" component={ProfileScreen}   // Profile Screen
+                <Tab.Screen 
+                    name="Profile" 
+                    component={ProfileScreen} 
                     options={{
                         tabBarIcon: ({ color, size }) => (
                             <MaterialCommunityIcons name="account-circle" color={color} size={26} />
                         ),
                         activeBackgroundColor: 'tomato',
+                    }}
+                />
 
-                    }} />
-
-                <Tab.Screen name="Menu" component={Menu}   // Profile Screen
+                <Tab.Screen 
+                    name="Menu" 
+                    component={Menu} 
                     options={{
                         tabBarIcon: ({ color, size }) => (
                             <MaterialCommunityIcons name="menu" color={color} size={26} />
                         ),
                         activeBackgroundColor: 'tomato',
-
-                    }} />
+                    }} 
+                />
             </Tab.Navigator>
         </NavigationContainer>
     )

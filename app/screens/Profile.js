@@ -3,9 +3,15 @@ import { View, StyleSheet, Text, TouchableOpacity, Image, Dimensions } from 'rea
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { LinearGradient } from 'expo-linear-gradient';
 
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
+
+import { NavigationContainer, DrawerActions } from '@react-navigation/native';
+
+
 const height = Dimensions.get('window').height;
 
-const ProfileScreen = () => {
+const ProfileScreen = ({ navigation }) => {
 
 
     return (
@@ -86,6 +92,13 @@ const ProfileScreen = () => {
                     </TouchableOpacity>
                 </View>
             </LinearGradient>
+
+            <TouchableOpacity
+                style={{ position: 'absolute', right:20, top:50 }}
+                onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+            >
+                <MaterialCommunityIcons name="menu" color={'#444'} size={30} />
+            </TouchableOpacity>
         </View>
     );
 };
