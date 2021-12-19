@@ -94,36 +94,39 @@ export default function Mapscreen() {
 
             {spot && visible ? (
                 <TouchableWithoutFeedback onPress={() => { setVisible(true) }} >
-                    <View style={styles.mapbox}>
-                        {
-                            response.filter(
-                                (item) =>
-                                    item.id == spot
-                            ).map(
-                                (it) =>
-                                (<>
+<>
+                    {
+                        response.filter(
+                            (item) =>
+                                item.id == spot
+                        ).map(
+                            (it) =>
+                            (
+                                <View key={it.id} style={styles.mapbox}>
                                     <Image key={it.id} style={styles.mapboxImage} resizeMode='cover' source={it.image} />
                                     <View style={styles.mapboxText}>
                                         <Text style={styles.mapboxhead}>{it.callout}</Text>
                                         <Text style={styles.mapboxDesc}>{it.description} </Text>
-                                    
-                                </View></>)
+
+                                    </View>
+                                </View>
                             )
-                        }
-
-                    </View>
+                        )
+                    }
+</>
                 </TouchableWithoutFeedback>
-            ) : <View />}
+    ) : <View />
+}
 
-            <View style={styles.container} >
-                
-                <TextInput
-                    style={styles.search}
-                    label="Search In Map"
-                    right={<TextInput.Icon name="magnify" />}
-                />
-            </View>
-        </SafeAreaView>
+<View style={styles.container} >
+
+    <TextInput
+        style={styles.search}
+        label="Search In Map"
+        right={<TextInput.Icon name="magnify" />}
+    />
+</View>
+        </SafeAreaView >
     )
 }
 
@@ -146,7 +149,7 @@ const styles = StyleSheet.create({
         color: '#666',
         backgroundColor: '#fff',
         elevation: 3,
-        height:50,
+        height: 50,
     },
     map: {
         width: width,
