@@ -23,7 +23,7 @@ export default function HomeScreen({ navigation }) {
     return (
 
         <View >
-            <View style={{ backgroundColor: '#62d0f695', paddingTop: Platform.OS == 'android' ? 30 : 0 }} />
+            <View style={{ backgroundColor: '#62d0f695', paddingTop: Platform.OS == 'android' ? 28 : 0 }} />
             <ScrollView>
                 <LinearGradient style={{ marginBottom: 50 }} colors={['#62d0f630', '#62d0f625']}>
                     <Header />
