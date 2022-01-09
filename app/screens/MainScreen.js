@@ -11,6 +11,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import 'react-native-gesture-handler';
 import { createStackNavigator } from '@react-navigation/stack';
+import ProductContainer from '../../Screens/Products/ProductContainer';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -67,7 +68,7 @@ export default function MainScreen() {
                         ),
                     }} />
 
-                <Tab.Screen name="Cart" component={Cart}
+                <Tab.Screen name="Cart" component={ProductContainer}
                     options={{
                         tabBarIcon: ({ color, size }) => (
                             <MaterialCommunityIcons name="cart" color={color} size={26} />

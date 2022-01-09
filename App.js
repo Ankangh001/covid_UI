@@ -4,6 +4,8 @@ import Register from './app/screens/Register';
 import MainScreen from './app/screens/MainScreen'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { LogBox } from 'react-native';
+LogBox.ignoreAllLogs()
 
 const Stack = createStackNavigator();
 

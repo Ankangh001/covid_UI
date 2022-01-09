@@ -1,14 +1,29 @@
 import React from 'react'
-import { View, Text } from 'react-native';
+import { View, Text, SafeAreaView, Image, StyleSheet } from 'react-native'
 
-function Cart() {
+const Cart = () => {
     return (
-        <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
-            <Text style={{ fontSize: 25 }}>Map Screen</Text>
-        </View>
+        <SafeAreaView style={styles.header} >
+            <Image
+                source={require('../../assets/logo.png')}
+                resizeMode='contain'
+                style={{ height: 150 }}
+            />
+        </SafeAreaView>
     )
 }
+
+const styles = StyleSheet.create({
+    header: {
+        height: 80,
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 12,
+        backgroundColor: '#fff',
+        marginTop: 22,
+        marginBottom: 0
+    }
+})
 export default Cart
-
-
-// home cart  map profile menu 
